@@ -3,18 +3,18 @@
 } */
 
 .c-go-top {
-  background: none repeat scroll 0 0 padding-box #1099dd;
+  /* background: none repeat scroll 0 0 padding-box; */
   bottom: 20px;
-  border: 1px solid #1099dd;
-  border-radius: 50%;
-  color: #eee;
+  /* border: none; */
+  /* border-radius: 50%; */
+  color: #123fa3;
   display: none;
-  font-size: 12px;
+  /* font-size: 12px; */
   opacity: 0.8;
-  padding: 10px;
+  /* padding: 10px; */
   position: fixed;
   right: 5%;
-  text-decoration: none;
+  /* text-decoration: none; */
   z-index: 999;
 }
 
@@ -22,7 +22,7 @@
 .c-go-top:focus,
 .c-go-top:active,
 .c-go-top:visited {
-  color: #fff;
+  color: #123fa3;
   outline: 0;
   text-decoration: none;
 }
