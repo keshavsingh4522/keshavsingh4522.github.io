@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>editior page</title>
+	<style type="text/css">
+	*
+	{
+		margin:0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	/*start header*/
+		header
+		{
+			width: 100%;
+			height: 100px;
+			text-align: center;
+			background-color: #445454;
+			padding-top: 22px;
+			color: white;
+			text-transform: capitalize;
+			font-family: sans-serif;
+			float: left;
+			margin-bottom: 20px;
+		}
+	/*end header*/
+	/*start edit sectio*/
+		#edit-page
+		{
+			width:1000px;
+			height: 500px;
+			float: left;
+			margin-left:150px;
+			border:1px solid #909789;
+			outline: none;
+			box-shadow: 0px 0px 12px #878eee inset;
+			overflow-y: scroll;
+		}
+	/*end edit section*/
+	/*start left*/
+		.left
+		{
+			width: 45px;
+			height: 30px;
+			float: left;
+			margin-left: 3px;
+			margin-top: 5px;
+			cursor: copy;
+			border-radius: 10px;
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+
+		}
+		#left
+		{
+			position: absolute;
+			width: 150px;
+			height:auto;
+			left: 0;
+			top: 120px;
+		}
+		#image
+		{
+			width: 45px;
+			height: auto;
+			border-radius: 10px;
+			background-color: inherit;
+			opacity: 0;
+		}
+		#insimg
+		{
+			background-image: url(wordImage/insimg.png);
+		}
+		#insimg:before
+		{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			content: 'img';
+		}
+	/*end left section*/
+		button:focus
+		{
+			border:none;
+			outline-color: #656565;
+			outline: none;
+			border:1px solid rgba(0,0,0,0.5);
+		}
+	/*end left section*/
+	/*start right section*/
+		#right
+		{
+			width: 200px;
+			position: absolute;
+			right: 0;
+			top: 120px;
+			border:1px solid red;
+		}
+		.right
+		{
+			width: 100px;
+			margin-left: 3px;
+			border-radius: 2px;
+		}
+		#font-name,#right-p1
+		{
+			margin-left: 25px;
+			width:150px;
+			height: auto;
+			font-size: 16px;
+			background-color: #445454;
+			opacity: 0.5;
+			color: white;
+			border-radius: 10px;
+		}
+		ul
+		{
+			height: 20px;
+			display: none;
+		}
+		p
+		{
+			height: 20px;
+		}
+		body{overflow: scroll;}
+		::scrollbar-thumb
+		{
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<h1>1.0 text editor</h1>
+</header>
+<!-- left section -->
+<section id="left">
+<button class="left" id="undo"  style="background-image:url('wordImage/undo.png');">undo</button>
+<button class="left" id="redo" style="background-image:url('wordImage/redo.png');">redo</button>
+<button class="left" id="cut" style="background-image:url('wordImage/cut.png');">cut</button>
+<button class="left" id="copy" style="background-image:url('wordImage/copy.png');">copy</button>
+<button class="left" id="paste" title="not workinng">paste</button>
+<button class="left" id="selectAll">select All</button>
+<button class="left" id="delet">delete</button>
+<button class="left" id="forwardDelete">fdelete</button>
+<button class="left" id="superscript">A<sup>a</sup></button>
+<button class="left" id="subscript">A<sub>a</sub></button>
+<button class="left" id="underline"><u>U</u></button>
+<button class="left" id="italic"><i>I</i></button>
+<button class="left" id="bold"><b>B</b></button>
+<button class="left" id="strikethrough"><s>Abc</s></button>
+<button class="left" onchange="insertImage(event)" id="insimg">
+<input type="file" accept="image/*" id="image">
+</button>
+<button class="left" id="justifyLeft">jleft</button>
+<button class="left" id="justifyCenter">jcenter</button>
+<button class="left" id="justifyRight">jright</button>
+<button class="left" id="justifyFull">jfull</button>
+<button class="left" id="insertHtml">iHtml</button>
+<button class="left" id="insertLineBreak">iLineB</button>
+<button class="left" id="insertHorizontalRule">ihr</button>
+<button class="left" id="insertText">itext</button>
+
+</section>
+<!-- editable section -->
+<section contenteditable id="edit-page" spellcheck="false">
+	
+</section>
+<!-- right section -->
+<section id="right">
+   <p id="right-p1">select font-name</p>
+<nav id="font-name">
+	<ul id="calibri">calibri</ul>
+	<ul id="sans-serif">sans-serif</ul>
+	<ul id="">Scream Real</ul>
+	<ul>Script</ul>
+	<ul>Scriptina</ul>
+	<ul>Rosewood Std</ul>
+	<ul>MV Boli</ul>
+	<ul>Ink Free</ul>
+</nav>
+<!-- <img id="ik" width="100" height="100" border="1"> -->
+</section>
+<script type="text/javascript">
+	var bold=document.getElementById('bold');
+	bold.onclick=function()
+	{
+		document.execCommand('bold');
+	}
+	var italic=document.getElementById('italic');
+	italic.onclick=function()
+	{
+		document.execCommand('italic');
+	}
+	var cut=document.getElementById('cut');
+	cut.onclick=function()
+	{
+		document.execCommand('cut');
+	}
+	var copy=document.getElementById('copy');
+	copy.onclick=function()
+	{
+		document.execCommand('copy');
+	}
+	var paste=document.getElementById('paste');
+	paste.onclick=function()
+	{
+		document.execCommand('paste',false,"");//null=""
+	}
+	var selectAll=document.getElementById('selectAll');
+	selectAll.onclick=function()
+	{
+		document.execCommand('selectAll');
+	}
+	var undo=document.getElementById('undo');
+	undo.onclick=function()
+	{
+		document.execCommand('undo');
+	}
+	var redo=document.getElementById('redo');
+	redo.onclick=function()
+	{
+		document.execCommand('redo');
+	}
+	var delet=document.getElementById('delet');
+	delet.onclick=function()
+	{
+		document.execCommand('delete');
+	}
+	var forwardDelete=document.getElementById('forwardDelete');
+	forwardDelete.onclick=function()
+	{
+		document.execCommand('forwardDelet');
+	}
+	var superscript=document.getElementById('superscript');
+	superscript.onclick=function()
+	{
+		document.execCommand('superscript');
+	}
+	var subscript=document.getElementById('subscript');
+	subscript.onclick=function()
+	{
+		document.execCommand('subscript');
+	}
+	var underline=document.getElementById('underline');
+	underline.onclick=function()
+	{
+		document.execCommand('underline');
+	}
+	var delet=document.getElementById('strikethrough');
+	strikethrough.onclick=function()
+	{
+		document.execCommand('strikethrough');
+	}
+	// var insertImage=function()
+	// {
+	// 	document.execCommand('insertImage',false,'a,jpg');
+	// }
+	var insertImage=function(event)
+	{
+		var input=event.target;
+		var reader=new FileReader();
+		reader.onload=function()
+		{
+	    var filename=reader.result;
+		// var ik=document.getElementById('ik');
+		// ik.src=filename;
+	 	document.execCommand('insertImage',false,filename);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+	var justifyRight=document.getElementById('justifyRight');
+	justifyRight.onclick=function()
+	{
+		document.execCommand('justifyRight');
+	}
+	var justifyCenter=document.getElementById('justifyCenter');
+	justifyCenter.onclick=function()
+	{
+		document.execCommand('justifyCenter');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var insertHtml=document.getElementById('insertHtml');
+	insertHtml.onclick=function()
+	{
+		document.execCommand('insertHtml');
+	}
+	var insertLineBreak=document.getElementById('insertLineBreak');
+	insertLineBreak.onclick=function()
+	{
+		document.execCommand('insertLineBreak');
+	}
+	var insertHorizontalRule=document.getElementById('insertHorizontalRule');
+	insertHorizontalRule.onclick=function()
+	{
+		document.execCommand('insertHorizontalRule');
+	}
+	var insertText=document.getElementById('insertText');
+    insertText.onclick=function()
+	{
+		document.execCommand('insertText',null,'keshav singh');
+	}
+	// right section
+	var right_p1=document.getElementById('right-p1');
+	right_p1.onmouseover=function()
+	{
+		this.color='red';
+	}
+	var sans_serif=document.getElementById('sans-serif');
+	sans_serif.onclick=function()
+	{
+		document.execCommand('fontName',null,'sans-serif');
+	}
+	var calibri=document.getElementById('calibri');
+	calibri.onclick=function()
+	{
+		document.execCommand('fontName',null,'calibri');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+	var justifyFull=document.getElementById('justifyFull');
+	justifyFull.onclick=function()
+	{
+		document.execCommand('justifyFull');
+	}
+</script>
+</body>
+</html>
